@@ -1,0 +1,10 @@
+TODO:
+
+1. Introduce environment variables
+2. Separate interface concerns in file structure
+
+contact-us
+- api
+- cli
+- app
+- scripts
