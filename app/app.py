@@ -1,6 +1,12 @@
 class App:
+
+    def __init__(self):
+        self.messages = list()
+
     def create_message(self, email, body):
-        return { "email": email, "body": body}
-        
+        message = { "email": email, "body": body}
+        self.messages.append(message)
+        return message
+
     def list_messages(self):
-        return []
+        return self.messages

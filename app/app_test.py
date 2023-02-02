@@ -11,6 +11,10 @@ def test_app_creates_messages():
 
 def test_app_lists_messages():
     app = App()
+
+    messageA = app.create_message(email="a@a.com", body="a")
+    messageB = app.create_message(email="b@b.com", body="b")
+
     messages = app.list_messages()
 
-    assert messages == []
+    assert messages == [messageA, messageB]
