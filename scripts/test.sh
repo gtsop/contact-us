@@ -1,2 +1,6 @@
 #!/usr/bin/env sh
-pytest
+if [ "$1" == "--watch" ]; then
+    ptw --runner "pytest --testmon"
+else
+    pytest
+fi
