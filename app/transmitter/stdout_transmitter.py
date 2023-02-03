@@ -1,4 +1,4 @@
-from ..message import Message
+from app.message import Message
 
 class StdOutTransmitter:
     def transmit(self, message: Message):

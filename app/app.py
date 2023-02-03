@@ -1,5 +1,5 @@
-from .message import Message
-from .transmitters.transmitter import Transmitter
+from app.message import Message
+from app.transmitter import Transmitter
 
 class App:
 

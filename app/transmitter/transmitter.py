@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from ..message import Message
+from app.message import Message
 
 class Transmitter(ABC):
     @abstractmethod

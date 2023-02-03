@@ -1,5 +1,6 @@
+from app.message import Message
+
 from .stdout_transmitter import StdOutTransmitter
-from ..message import Message
 
 def test_stdout_transmitter_instantiates():
     assert StdOutTransmitter()
