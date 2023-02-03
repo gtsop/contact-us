@@ -1,9 +1,11 @@
 from .message import Message
+from .transmitters.transmitter import Transmitter
 
 class App:
 
-    def __init__(self):
+    def __init__(self, transmitter: Transmitter):
         self.messages = list()
+        self.transmitter = transmitter
 
     def create_message(self, email, body):
         message = Message(email=email, body=body)
@@ -11,7 +13,7 @@ class App:
         return message
 
     def send_message(self, message):
-        print(f"From: {message.email}\n{message.body}")
+        self.transmitter.transmit(message)
         message.send()
 
     def list_messages(self):

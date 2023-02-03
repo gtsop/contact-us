@@ -1,19 +1,22 @@
 import pytest
+from unittest.mock import Mock
 
 from .app import App
 
+transmitter = Mock()
+
 def test_app_instantiates():
-    assert App()
+    assert App(transmitter)
 
 def test_app_creates_messages():
-    app = App()
+    app = App(transmitter)
     message = app.create_message(email="foo", body="bar")
 
     assert message.email == 'foo'
     assert message.body == 'bar'
 
 def test_app_lists_messages():
-    app = App()
+    app = App(transmitter)
 
     messageA = app.create_message(email="a@a.com", body="a")
     messageB = app.create_message(email="b@b.com", body="b")
@@ -22,19 +25,18 @@ def test_app_lists_messages():
 
     assert messages == [messageA, messageB]
 
-def test_app_sends_messages(capsys):
-    app = App()
+def test_app_sends_messages():
+    app = App(transmitter)
 
     messageA = app.create_message(email="a@a.com", body="a")
 
     app.send_message(messageA)
 
-    captured = capsys.readouterr()
-    assert "From: a@a.com\na" in captured.out
+    transmitter.transmit.assert_called_with(messageA)
     assert messageA.is_sent == True
 
 def test_app_lists_unsent_messages():
-    app = App()
+    app = App(transmitter)
 
     messageA = app.create_message(email="a@a.com", body="a")
     messageB = app.create_message(email="b@b.com", body="b")
