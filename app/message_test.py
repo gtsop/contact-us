@@ -18,9 +18,12 @@ def test_message_property_is_sent():
 
     assert message.is_sent == False
 
-def test_message_method_send():
-    message = Message()
+def test_message_method_send(capsys):
+    message = Message(email="john", body="test")
 
     message.send()
 
+    captured = capsys.readouterr()
+    
+    assert "From: john\ntest" in captured.out
     assert message.is_sent == True

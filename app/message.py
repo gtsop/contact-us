@@ -5,4 +5,5 @@ class Message:
         self.is_sent = False
 
     def send(self):
+        print(f"From: {self.email}\n{self.body}")
         self.is_sent = True

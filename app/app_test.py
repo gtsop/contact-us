@@ -22,7 +22,6 @@ def test_app_lists_messages():
 
     assert messages == [messageA, messageB]
 
-
 def test_app_sends_messages():
     app = App()
 
@@ -33,7 +32,6 @@ def test_app_sends_messages():
     assert messageA.is_sent == True
 
 def test_app_lists_unsent_messages():
-
     app = App()
 
     messageA = app.create_message(email="a@a.com", body="a")
