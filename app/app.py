@@ -11,6 +11,7 @@ class App:
         return message
 
     def send_message(self, message):
+        print(f"From: {message.email}\n{message.body}")
         message.send()
 
     def list_messages(self):

@@ -22,13 +22,15 @@ def test_app_lists_messages():
 
     assert messages == [messageA, messageB]
 
-def test_app_sends_messages():
+def test_app_sends_messages(capsys):
     app = App()
 
     messageA = app.create_message(email="a@a.com", body="a")
 
     app.send_message(messageA)
 
+    captured = capsys.readouterr()
+    assert "From: a@a.com\na" in captured.out
     assert messageA.is_sent == True
 
 def test_app_lists_unsent_messages():
