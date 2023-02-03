@@ -9,7 +9,8 @@ def test_app_creates_messages():
     app = App()
     message = app.create_message(email="foo", body="bar")
 
-    assert message == { "email": "foo", "body": "bar" }
+    assert message.email == 'foo'
+    assert message.body == 'bar'
 
 def test_app_lists_messages():
     app = App()
@@ -29,7 +30,7 @@ def test_app_sends_messages():
 
     app.send_message(messageA)
 
-    assert messageA['isSent'] == True
+    assert messageA.is_sent == True
 
 def test_app_lists_unsent_messages():
 
