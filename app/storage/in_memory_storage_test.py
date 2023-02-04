@@ -17,3 +17,5 @@ def test_in_memory_storage_method_all():
 
     storage.append(messageA)
     storage.append(messageB)
+
+    assert storage.all() == [messageA, messageB]
