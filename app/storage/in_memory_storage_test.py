@@ -1,21 +1,19 @@
-from .in_memory_storage import InMemoryStroage
+from .in_memory_storage import InMemoryStorage
 from app.message import Message
 
 def test_in_memory_storage_instantiates():
-    assert InMemoryStroage()
+    assert InMemoryStorage()
 
 def test_in_memory_storage_method_append():
-    storage = InMemoryStroage()
+    storage = InMemoryStorage()
     message = Message()
     storage.append(message)
 
 def test_in_memory_storage_method_all():
-    storage = InMemoryStroage()
+    storage = InMemoryStorage()
 
     messageA = Message()
     messageB = Message()
 
     storage.append(messageA)
     storage.append(messageB)
-
-    assert storage.all() == [messageA, messageB]

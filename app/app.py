@@ -1,15 +1,16 @@
 from app.message import Message
 from app.transmitter import Transmitter
+from app.storage import Storage, InMemoryStorage
 
 class App:
 
-    def __init__(self, transmitter: Transmitter):
-        self.messages = list()
-        self.transmitter = transmitter
+    def __init__(self, transmitter: Transmitter, storage: Storage = InMemoryStorage):
+        self.transmitter = transmitter()
+        self.storage = storage()
 
     def create_message(self, email, body):
         message = Message(email=email, body=body)
-        self.messages.append(message)
+        self.storage.append(message)
         return message
 
     def send_message(self, message):
@@ -17,7 +18,7 @@ class App:
         message.send()
 
     def list_messages(self):
-        return self.messages
+        return self.storage.all()
     
     def list_unsent_messages(self):
-        return [m for m in self.messages if not m.is_sent]
+        return [m for m in self.storage.all() if not m.is_sent]

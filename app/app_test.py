@@ -3,7 +3,7 @@ from unittest.mock import Mock
 
 from .app import App
 
-transmitter = Mock()
+transmitter = Mock
 
 def test_app_instantiates():
     assert App(transmitter)
@@ -32,7 +32,7 @@ def test_app_sends_messages():
 
     app.send_message(messageA)
 
-    transmitter.transmit.assert_called_with(messageA)
+    app.transmitter.transmit.assert_called_with(messageA)
     assert messageA.is_sent == True
 
 def test_app_lists_unsent_messages():

@@ -2,14 +2,12 @@ import typer
 
 from app.app import App
 from app.transmitter import StdOutTransmitter
+from app.storage import InMemoryStorage
 
 cli = typer.Typer()
 
-transmitter = StdOutTransmitter()
-storage = None
-
 def create_app():
-    return App(transmitter=transmitter)
+    return App(transmitter=StdOutTransmitter, storage=InMemoryStorage)
 
 @cli.command()
 def list_messages():

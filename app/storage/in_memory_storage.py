@@ -2,7 +2,7 @@ from typing import List
 from app.message import Message
 from .storage import Storage
 
-class InMemoryStroage(Storage):
+class InMemoryStorage(Storage):
     def __init__(self):
         self.messages: List[Message] = []
 
