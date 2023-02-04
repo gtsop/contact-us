@@ -6,9 +6,6 @@ from app.transmitter import StdOutTransmitter
 cli = typer.Typer()
 app = App(StdOutTransmitter())
 
-def create_cli():
-    return typer.Typer()
-
 @cli.command()
 def list_messages():
     messages = app.list_messages()
