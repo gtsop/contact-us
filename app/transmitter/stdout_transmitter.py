@@ -1,5 +1,6 @@
-from .transmitter import Transmitter
 from app.message import Message
+
+from .transmitter import Transmitter
 
 class StdOutTransmitter(Transmitter):
     def transmit(self, message: Message):

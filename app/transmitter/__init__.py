@@ -1,2 +1,2 @@
 from .transmitter import Transmitter
-from .std_out_transmitter import StdOutTransmitter
+from .stdout_transmitter import StdOutTransmitter
