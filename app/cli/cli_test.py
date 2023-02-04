@@ -12,4 +12,4 @@ def test_cli():
 def test_cli_create_message():
     result = runner.invoke(cli, ["create-message", "foo@bar.com", "hello world"])
     assert result.exit_code == 0
-    assert 'Created message: email="foo@bar.com" body="hello world"'
+    assert 'Created message: email="foo@bar.com" body="hello world"' in result.stdout

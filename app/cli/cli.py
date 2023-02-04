@@ -12,7 +12,7 @@ def list_messages():
 
 @cli.command()
 def create_message(email: str, body: str):
-    pass
+    print(f'Created message: email="{email}" body="{body}"')
 
 if __name__ == "__main__":
     cli()
