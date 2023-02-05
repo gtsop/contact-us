@@ -6,3 +6,6 @@ class Message:
 
     def send(self):
         self.is_sent = True
+    
+    def is_equal(self, other: 'Message'):
+        return self.email == other.email and self.body == other.body
