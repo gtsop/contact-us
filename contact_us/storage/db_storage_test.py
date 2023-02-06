@@ -1,6 +1,6 @@
 from .db_storage import DBStorage
-from app.message import Message
-from app.__test_utils__ import are_messages_equal
+from contact_us.message import Message
+from contact_us.__test_utils__ import are_messages_equal
 
 def test_db_storage_instantiates():
     assert DBStorage()

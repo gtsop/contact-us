@@ -1,6 +1,6 @@
 from .in_memory_storage import InMemoryStorage
-from app.message import Message
-from app.__test_utils__ import are_messages_equal
+from contact_us.message import Message
+from contact_us.__test_utils__ import are_messages_equal
 
 def test_in_memory_storage_instantiates():
     assert InMemoryStorage()

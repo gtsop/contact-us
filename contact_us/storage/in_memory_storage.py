@@ -1,5 +1,5 @@
 from typing import List
-from app.message import Message
+from contact_us.message import Message
 from .storage import Storage
 
 class InMemoryStorage(Storage):

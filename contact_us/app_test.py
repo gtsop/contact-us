@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import Mock
-from app.__test_utils__ import are_messages_equal 
+from contact_us.__test_utils__ import are_messages_equal 
 
 from .app import App
 

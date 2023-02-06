@@ -1,8 +1,8 @@
 import typer
 
-from app.app import App
-from app.transmitter import StdOutTransmitter
-from app.storage import InMemoryStorage
+from contact_us.app import App
+from contact_us.transmitter import StdOutTransmitter
+from contact_us.storage import InMemoryStorage
 
 cli = typer.Typer()
 
