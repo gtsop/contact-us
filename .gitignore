@@ -2,3 +2,5 @@ __pycache__/
 *.db
 .vscode/
 .testmondata
+build/
+contact_us.egg-info/

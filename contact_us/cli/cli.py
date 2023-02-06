@@ -23,5 +23,5 @@ def create_message(email: str, body: str):
     message = app.create_message(email=email, body=body)
     print(f'Created message: email="{message.email}" body="{message.body}"')
 
-if __name__ == "__main__":
+def main():
     cli()
