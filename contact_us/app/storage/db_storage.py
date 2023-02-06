@@ -1,5 +1,5 @@
 from sqlalchemy import Column, String
-from contact_us.message import Message
+from contact_us.app.message import Message
 from .database import BaseModel, Session, engine
 from .storage import Storage
 

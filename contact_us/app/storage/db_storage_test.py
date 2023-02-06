@@ -1,5 +1,5 @@
 from .db_storage import DBStorage
-from contact_us.message import Message
+from contact_us.app.message import Message
 from contact_us.__test_utils__ import are_messages_equal
 
 def test_db_storage_instantiates():

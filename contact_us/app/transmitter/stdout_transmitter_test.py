@@ -1,4 +1,4 @@
-from contact_us.message import Message
+from contact_us.app.message import Message
 
 from .stdout_transmitter import StdOutTransmitter
 

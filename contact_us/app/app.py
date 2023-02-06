@@ -1,6 +1,6 @@
-from contact_us.message import Message
-from contact_us.transmitter import Transmitter
-from contact_us.storage import Storage, InMemoryStorage
+from contact_us.app.message import Message
+from contact_us.app.transmitter import Transmitter
+from contact_us.app.storage import Storage, InMemoryStorage
 
 class App:
 

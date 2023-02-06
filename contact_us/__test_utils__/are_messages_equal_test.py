@@ -1,4 +1,4 @@
-from contact_us.message import Message
+from contact_us.app.message import Message
 from .are_messages_equal import are_messages_equal 
 
 def test_are_messages_equal():
