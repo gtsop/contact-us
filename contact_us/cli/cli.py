@@ -1,23 +1,19 @@
 import typer
 
-from typing import Type
+from typing import Callable
 from contact_us.app import App
 from contact_us.app.transmitter import Transmitter, StdOutTransmitter
 from contact_us.app.storage import Storage, InMemoryStorage, DBStorage
 
 
-def create_app():
-    return
+def app_factory() -> App:
+    return App(transmitter=StdOutTransmitter, storage=DBStorage)
 
 
 class CLI:
-    def __init__(
-        self,
-        transmitter: Type[Transmitter] = StdOutTransmitter,
-        storage: Type[Storage] = InMemoryStorage,
-    ):
+    def __init__(self, create_app: Callable[[], App] = app_factory):
         self.typer = typer.Typer()
-        self.app = App(transmitter=transmitter, storage=storage)
+        self.app = create_app()
 
         @self.typer.command()
         def list_messages():
@@ -31,7 +27,9 @@ class CLI:
             message = self.app.create_message(email=email, body=body)
             print(f'Created message: email="{message.email}" body="{message.body}"')
 
+    def exec(self):
+        return self.typer()
 
 def main():
-    cli = CLI(storage=DBStorage)
-    cli.typer()
+    cli = CLI()
+    cli.exec()

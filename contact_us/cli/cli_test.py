@@ -1,18 +1,16 @@
 import pytest
-from contact_us.app.storage import DBStorage
+from contact_us.testing import create_cli
 from typer.testing import CliRunner
 
-from .cli import CLI
-
 def test_cli_create_message():
-    cli = CLI()
+    cli = create_cli()
     runner = CliRunner()
     result = runner.invoke(cli.typer, ["create-message", "foo@bar.com", "hello world"])
     assert result.exit_code == 0
     assert 'Created message: email="foo@bar.com" body="hello world"' in result.stdout
 
 def test_cli_list_messages():
-    cli = CLI(storage=DBStorage)
+    cli = create_cli()
     runner = CliRunner()
     result = runner.invoke(cli.typer, ["list-messages"])
 
@@ -22,8 +20,7 @@ def test_cli_list_messages():
     result = runner.invoke(cli.typer, ["create-message", "foo@bar.com", "hello world"])
     result = runner.invoke(cli.typer, ["create-message", "bar@foo.com", "goodbye world"])
 
-    cli2 = CLI(storage=DBStorage)
-    result = runner.invoke(cli2.typer, ["list-messages"])
+    result = runner.invoke(cli.typer, ["list-messages"])
 
     assert result.exit_code == 0
     assert ('2 messages\n\n'
