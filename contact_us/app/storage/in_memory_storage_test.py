@@ -1,22 +1,6 @@
 from .in_memory_storage import InMemoryStorage
-from contact_us.app.message import Message
-from contact_us.__test_utils__ import are_messages_equal
 
-def test_in_memory_storage_instantiates():
-    assert InMemoryStorage()
+from .storage_test import abstract_test_storage
 
-def test_in_memory_storage_method_append():
-    storage = InMemoryStorage()
-    message = Message()
-    storage.append(message)
-
-def test_in_memory_storage_method_all():
-    storage = InMemoryStorage()
-
-    messageA = Message()
-    messageB = Message()
-
-    storage.append(messageA)
-    storage.append(messageB)
-
-    assert are_messages_equal(storage.all(), [messageA, messageB])
+def test_in_memory_storage():
+    abstract_test_storage(InMemoryStorage)

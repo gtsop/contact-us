@@ -5,12 +5,12 @@ from contact_us.app.message import Message
 class Storage(ABC):
     @abstractmethod
     def append(self, message: Message):
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def all(self) -> List[Message]:
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def update(self, message: Message):
-        pass
+        raise NotImplementedError
