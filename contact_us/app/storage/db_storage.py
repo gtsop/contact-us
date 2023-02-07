@@ -30,9 +30,7 @@ class DBStorage(Storage):
         self.db.close()
 
     def append(self, message: Message):
-        db_message = MessageModel(
-            email=message.email, body=message.body, is_sent=message.is_sent
-        )
+        db_message = MessageModel.from_message(message)
         self.db.add(db_message)
         self.db.commit()
         self.db.refresh(db_message)
@@ -51,6 +49,6 @@ class DBStorage(Storage):
 
     def all(self):
         return [
-            Message(email=entry.email, body=entry.body, is_sent=entry.is_sent)
+            entry.to_message()
             for entry in self.db.query(MessageModel).all()
         ]
