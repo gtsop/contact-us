@@ -1,11 +1,11 @@
-from typing import Type, Tuple, Callable
+from typing import Tuple, Callable
 from sqlalchemy import create_engine, Engine
-from sqlalchemy.orm import Session, Mapped, mapped_column, sessionmaker
+from sqlalchemy.orm import Session, sessionmaker
 
 from contact_us.settings import settings
 from contact_us.app.message import Message
 
-from .database import BaseModel
+from .models import BaseModel, MessageModel
 from .storage import Storage
 
 
@@ -17,14 +17,6 @@ def session_factory() -> Tuple[Session, Engine]:
     )
     session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
     return session(), engine
-
-
-class MessageModel(BaseModel):
-    __tablename__ = "messages"
-
-    email: Mapped[str] = mapped_column(primary_key=True)
-    body: Mapped[str] = mapped_column()
-    is_sent: Mapped[bool] = mapped_column(nullable=False)
 
 
 class DBStorage(Storage):
