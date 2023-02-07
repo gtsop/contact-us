@@ -1,15 +1,12 @@
-from typing import Type
 from contact_us.app.message import Message
 from contact_us.app.transmitter import Transmitter
-from contact_us.app.storage import Storage, InMemoryStorage
+from contact_us.app.storage import Storage
 
 
 class App:
-    def __init__(
-        self, transmitter: Type[Transmitter], storage: type[Storage] = InMemoryStorage
-    ):
-        self.transmitter = transmitter()
-        self.storage = storage()
+    def __init__(self, transmitter: Transmitter, storage: Storage):
+        self.transmitter = transmitter
+        self.storage = storage
 
     def create_message(self, email, body):
         message = Message(email=email, body=body)
@@ -25,3 +22,10 @@ class App:
 
     def list_unsent_messages(self):
         return [m for m in self.storage.all() if not m.is_sent]
+
+
+def create_app(
+    transmitter: type[Transmitter],
+    storage: type[Storage],
+) -> App:
+    return App(transmitter=transmitter(), storage=storage())

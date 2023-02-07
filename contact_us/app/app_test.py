@@ -1,17 +1,18 @@
 from unittest.mock import Mock
 from contact_us.__test_utils__ import are_messages_equal
+from contact_us.testing import create_app
 
 from .app import App
 
-transmitter = Mock
-
-
 def test_app_instantiates():
-    assert App(transmitter)
+    transmitter = Mock()
+    storage = Mock()
+
+    assert App(transmitter=transmitter, storage=storage)
 
 
 def test_app_creates_messages():
-    app = App(transmitter)
+    app = create_app()
     message = app.create_message(email="foo", body="bar")
 
     assert message.email == "foo"
@@ -19,7 +20,7 @@ def test_app_creates_messages():
 
 
 def test_app_lists_messages():
-    app = App(transmitter)
+    app = create_app()
 
     messageA = app.create_message(email="a@a.com", body="a")
     messageB = app.create_message(email="b@b.com", body="b")
@@ -30,7 +31,8 @@ def test_app_lists_messages():
 
 
 def test_app_sends_messages():
-    app = App(transmitter)
+    transmitter = Mock
+    app = create_app(transmitter=transmitter)
 
     messageA = app.create_message(email="a@a.com", body="a")
 
@@ -41,7 +43,7 @@ def test_app_sends_messages():
 
 
 def test_app_lists_unsent_messages():
-    app = App(transmitter)
+    app = create_app()
 
     messageA = app.create_message(email="a@a.com", body="a")
     messageB = app.create_message(email="b@b.com", body="b")
