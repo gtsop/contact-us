@@ -1,20 +1,23 @@
-from sqlalchemy import Column, String
+from sqlalchemy.orm import Mapped, mapped_column
 from contact_us.app.message import Message
 from .database import BaseModel, Session, engine
 from .storage import Storage
 
+
 class MessageModel(BaseModel):
     __tablename__ = "messages"
 
-    email = Column(String, primary_key=True, index=True)
-    body = Column(String)
+    email: Mapped[str] = mapped_column(primary_key=True)
+    body: Mapped[str] = mapped_column()
+
 
 BaseModel.metadata.create_all(bind=engine)
+
 
 class DBStorage(Storage):
     def __init__(self):
         self.db = Session()
-    
+
     def __del__(self):
         self.db.close()
 
@@ -24,8 +27,9 @@ class DBStorage(Storage):
         self.db.commit()
         self.db.refresh(db_message)
         return db_message
-    
+
     def all(self):
         return [
-            Message(email=entry.email, body=entry.body) for entry in self.db.query(MessageModel).all()
-            ]
+            Message(email=entry.email, body=entry.body)
+            for entry in self.db.query(MessageModel).all()
+        ]
