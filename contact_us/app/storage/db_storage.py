@@ -1,7 +1,20 @@
-from sqlalchemy.orm import Mapped, mapped_column
+from typing import Type, Tuple, Callable
+from sqlalchemy import create_engine, Engine
+from sqlalchemy.orm import Session, Mapped, mapped_column, sessionmaker
+
+from contact_us.settings import settings
 from contact_us.app.message import Message
-from .database import BaseModel, Session, engine
+
+from .database import BaseModel
 from .storage import Storage
+
+
+def session_factory() -> Tuple[Session, Engine]:
+    engine = create_engine(
+        settings.storage_db_uri, connect_args={"check_same_thread": False}
+    )
+    session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+    return session(), engine
 
 
 class MessageModel(BaseModel):
@@ -11,12 +24,12 @@ class MessageModel(BaseModel):
     body: Mapped[str] = mapped_column()
 
 
-BaseModel.metadata.create_all(bind=engine)
-
-
 class DBStorage(Storage):
-    def __init__(self):
-        self.db = Session()
+    def __init__(
+        self, create_session: Callable[[], Tuple[Session, Engine]] = session_factory
+    ):
+        self.db, self.engine = create_session()
+        BaseModel.metadata.create_all(bind=self.engine)
 
     def __del__(self):
         self.db.close()
