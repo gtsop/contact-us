@@ -1,8 +1,8 @@
 class Message:
-    def __init__(self, email: str = '', body: str = ''):
+    def __init__(self, email: str = '', body: str = '', is_sent: bool = False):
         self.email = email
         self.body = body
-        self.is_sent = False
+        self.is_sent = is_sent
 
     def send(self):
         self.is_sent = True

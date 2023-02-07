@@ -16,6 +16,7 @@ class App:
     def send_message(self, message):
         self.transmitter.transmit(message)
         message.send()
+        self.storage.update(message)
 
     def list_messages(self):
         return self.storage.all()

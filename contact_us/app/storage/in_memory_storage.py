@@ -11,3 +11,6 @@ class InMemoryStorage(Storage):
     
     def all(self):
         return self.messages
+    
+    def update(self, message: Message):
+        pass

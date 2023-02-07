@@ -22,6 +22,7 @@ class MessageModel(BaseModel):
 
     email: Mapped[str] = mapped_column(primary_key=True)
     body: Mapped[str] = mapped_column()
+    is_sent: Mapped[bool] = mapped_column(nullable=False)
 
 
 class DBStorage(Storage):
@@ -35,14 +36,27 @@ class DBStorage(Storage):
         self.db.close()
 
     def append(self, message: Message):
-        db_message = MessageModel(email=message.email, body=message.body)
+        db_message = MessageModel(
+            email=message.email, body=message.body, is_sent=message.is_sent
+        )
         self.db.add(db_message)
         self.db.commit()
         self.db.refresh(db_message)
         return db_message
 
+    def update(self, message: Message):
+        db_message = (
+            self.db.query(MessageModel)
+            .filter(MessageModel.email == message.email)
+            .filter(MessageModel.body == message.body)
+            .first()
+        )
+        if db_message:
+            db_message.is_sent = message.is_sent
+            self.db.commit()
+
     def all(self):
         return [
-            Message(email=entry.email, body=entry.body)
+            Message(email=entry.email, body=entry.body, is_sent=entry.is_sent)
             for entry in self.db.query(MessageModel).all()
         ]

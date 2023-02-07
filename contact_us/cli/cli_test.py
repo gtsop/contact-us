@@ -1,4 +1,3 @@
-import pytest
 from contact_us.testing import create_cli
 from typer.testing import CliRunner
 
@@ -19,8 +18,8 @@ def test_cli_list_messages():
     assert result.exit_code == 0
     assert "0 messages\n" in result.stdout
 
-    result = runner.invoke(cli.typer, ["create-message", "foo@bar.com", "hello world"])
-    result = runner.invoke(
+    runner.invoke(cli.typer, ["create-message", "foo@bar.com", "hello world"])
+    runner.invoke(
         cli.typer, ["create-message", "bar@foo.com", "goodbye world"]
     )
 
@@ -32,3 +31,24 @@ def test_cli_list_messages():
         '1. email="foo@bar.com" body="hello world"\n'
         '2. email="bar@foo.com" body="goodbye world"'
     ) in result.stdout
+
+def test_cli_send_message():
+    cli = create_cli()
+    runner = CliRunner()
+    runner.invoke(cli.typer, ["create-message", "foo@bar.com", "hello world"])
+
+    result = runner.invoke(cli.typer, ["send-message", "1"])
+    assert result.exit_code == 0
+    assert (
+        "Sending message: 1\n"
+        "From: foo@bar.com\n"
+        "hello world"
+    )
+
+    result = runner.invoke(cli.typer, ["list-messages"])
+    assert (
+        "1 messages\n\n"
+        '1. email="foo@bar.com" body="hello world" (sent)\n'
+    ) in result.stdout
+
+

@@ -10,3 +10,7 @@ class Storage(ABC):
     @abstractmethod
     def all(self) -> List[Message]:
         pass
+
+    @abstractmethod
+    def update(self, message: Message):
+        pass
