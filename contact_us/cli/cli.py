@@ -1,19 +1,13 @@
 import typer
 
-from typing import Callable
-from contact_us.app import App
+from contact_us.app import App, create_app
 from contact_us.app.transmitter import Transmitter, StdOutTransmitter
-from contact_us.app.storage import Storage, InMemoryStorage, DBStorage
-
-
-def app_factory() -> App:
-    return App(transmitter=StdOutTransmitter, storage=DBStorage)
-
+from contact_us.app.storage import Storage, DBStorage
 
 class CLI:
-    def __init__(self, create_app: Callable[[], App] = app_factory):
+    def __init__(self, app: App):
         self.typer = typer.Typer()
-        self.app = create_app()
+        self.app = app
 
         @self.typer.command()
         def list_messages():
@@ -30,6 +24,10 @@ class CLI:
     def exec(self):
         return self.typer()
 
+def create_cli(transmitter: type[Transmitter], storage: type[Storage]):
+    app = create_app(transmitter=transmitter, storage=storage)
+    return CLI(app=app)
+
 def main():
-    cli = CLI()
+    cli = create_cli(transmitter=StdOutTransmitter, storage=DBStorage)
     cli.exec()
