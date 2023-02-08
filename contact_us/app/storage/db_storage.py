@@ -11,9 +11,7 @@ from .storage import Storage
 
 def session_factory() -> Tuple[Session, Engine]:
     engine = create_engine(
-        # settings.storage_db_uri, connect_args={"check_same_thread": False}
-        "sqlite:///:memory:",
-        connect_args={"check_same_thread": False},
+        settings.storage_db_uri, connect_args={"check_same_thread": False}
     )
     session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
     return session(), engine
@@ -48,7 +46,4 @@ class DBStorage(Storage):
             self.db.commit()
 
     def all(self):
-        return [
-            entry.to_message()
-            for entry in self.db.query(MessageModel).all()
-        ]
+        return [entry.to_message() for entry in self.db.query(MessageModel).all()]
