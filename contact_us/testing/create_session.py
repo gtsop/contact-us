@@ -9,7 +9,6 @@ def create_session(sqlurl: str = "sqlite:///:memory:") -> Tuple[Session, Engine]
     session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
     return session(), engine
 
-
 def create_temp_create_session() -> Callable[[], Tuple[Session, Engine]]:
     temp_dir = tempfile.mkdtemp()
 

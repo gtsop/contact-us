@@ -6,7 +6,9 @@ from .storage_test import abstract_test_storage
 
 
 def test_in_memory_storage():
-    abstract_test_storage(InMemoryStorage)
+    def create_storage():
+        return InMemoryStorage()
+    abstract_test_storage(create_storage)
 
 
 def test_in_momory_storage_looses_data_across_instances():

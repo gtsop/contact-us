@@ -41,7 +41,8 @@ def test_app_sends_messages():
 
 
 def test_app_lists_unsent_messages():
-    app = create_app()
+    transmitter = Mock
+    app = create_app(transmitter=transmitter)
 
     messageA = app.create_message(email="a@a.com", body="a")
     messageB = app.create_message(email="b@b.com", body="b")
