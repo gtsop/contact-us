@@ -1,10 +1,38 @@
 TODO:
 
-1. Introduce environment variables
-2. Separate interface concerns in file structure
+1. Write a README
 
-contact-us
-- api
-- cli
-- app
-- scripts
+- Installing contact-us from source
+- Configuring contact-us
+- Running contact-us
+
+2. Configurable application settings (env vars)
+
+- Storage strategy
+- Transmission strategy
+
+3. Introduce email transmitter
+
+4. DATA: Introduce database migrations
+
+5. DATA: Migrate from email,body to data dict of optional values (email, body, first_name, last_name, phone, etc)
+
+6. API: Introduce api endpoints
+
+7. API: Introduce spam control
+
+8. Dockerize application
+
+9. Explore compiling to cython
+
+10. Figure out automatic version updates
+
+11. Introduce documentation page similar to fastapi/typer/pydantic
+
+12. Introduce CI/CD
+
+13. Introduce performance testing
+
+14. Introduce availability testing
+
+15. Introduce E2E testing
