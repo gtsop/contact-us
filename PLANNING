@@ -1,5 +1,7 @@
 TODO:
 
+0. Publish to github
+
 1. Write a README
 
 - Installing contact-us from source
@@ -36,3 +38,5 @@ TODO:
 14. Introduce availability testing
 
 15. Introduce E2E testing
+
+16. Introduce pre-commit test hook
