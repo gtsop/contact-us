@@ -2,7 +2,7 @@ import typer
 
 from contact_us.app import App, create_app
 from contact_us.app.transmitter import Transmitter, StdOutTransmitter
-from contact_us.app.storage import Storage, DBStorage
+from contact_us.app.storage import Storage, DatabaseStorage
 
 from contact_us.settings import Settings
 
@@ -41,5 +41,5 @@ def create_cli(transmitter: type[Transmitter], storage: type[Storage]):
 
 
 def main():
-    cli = create_cli(transmitter=StdOutTransmitter, storage=DBStorage)
+    cli = create_cli(transmitter=StdOutTransmitter, storage=DatabaseStorage)
     cli.exec()

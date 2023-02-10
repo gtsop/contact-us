@@ -2,7 +2,7 @@ from contact_us.app.message import Message
 from contact_us.testing import are_messages_equal
 from .in_memory_storage import InMemoryStorage
 
-from .storage_test import abstract_test_storage
+from ..storage_test import abstract_test_storage
 
 
 def test_in_memory_storage():

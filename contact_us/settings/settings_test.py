@@ -2,7 +2,7 @@ import os
 import copy
 import pytest
 
-from contact_us.app.storage import InMemoryStorage, DBStorage
+from contact_us.app.storage import InMemoryStorage, DatabaseStorage
 from .settings import Settings
 
 @pytest.fixture

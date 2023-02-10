@@ -5,8 +5,8 @@ from sqlalchemy.orm import Session, sessionmaker
 from contact_us.settings import settings
 from contact_us.app.message import Message
 
-from .models import BaseModel, MessageModel
-from .storage import Storage
+from ..models import BaseModel, MessageModel
+from ..storage import Storage
 
 
 def session_factory() -> Tuple[Session, Engine]:
@@ -17,7 +17,7 @@ def session_factory() -> Tuple[Session, Engine]:
     return session(), engine
 
 
-class DBStorage(Storage):
+class DatabaseStorage(Storage):
     def __init__(
         self, create_session: Callable[[], Tuple[Session, Engine]] = session_factory
     ):
