@@ -1,7 +1,17 @@
+from enum import Enum
+
 from contact_us.app.message import Message
 from contact_us.app.transmitter import Transmitter
-from contact_us.app.storage import Storage
+from contact_us.app.storage import Storage, InMemoryStorage, DBStorage
+from contact_us.settings import settings
 
+class StorageEnum(Enum):
+    in_memory = InMemoryStorage
+    db_storage = DBStorage
+
+    @classmethod
+    def _missing_(cls):
+        return InMemoryStorage
 
 class App:
     def __init__(self, transmitter: Transmitter, storage: Storage):
@@ -27,6 +37,6 @@ class App:
 
 def create_app(
     transmitter: type[Transmitter],
-    storage: type[Storage],
+    storage: type[Storage] = StorageEnum[settings.storage_strategy].value
 ) -> App:
     return App(transmitter=transmitter(), storage=storage())

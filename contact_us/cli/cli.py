@@ -4,6 +4,7 @@ from contact_us.app import App, create_app
 from contact_us.app.transmitter import Transmitter, StdOutTransmitter
 from contact_us.app.storage import Storage, DBStorage
 
+from contact_us.settings import Settings
 
 class CLI:
     def __init__(self, app: App):

@@ -2,6 +2,7 @@ from typing import List
 from abc import ABC, abstractmethod
 from contact_us.app.message import Message
 
+
 class Storage(ABC):
     @abstractmethod
     def append(self, message: Message):
