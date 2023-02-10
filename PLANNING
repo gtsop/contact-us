@@ -8,12 +8,14 @@ TODO:
 - Configuring contact-us
 - Running contact-us
 
-2. Configurable application settings (env vars)
+2. [DONE] Configurable application settings (env vars)
 
 - Storage strategy
 - Transmission strategy
 
-3. Introduce email transmitter
+3. Introduce more transmitters
+    3.1 introduce no-op transmitter
+    3.2 introduce email transmitter
 
 4. DATA: Introduce database migrations
 
