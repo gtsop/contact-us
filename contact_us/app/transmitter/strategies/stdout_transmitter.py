@@ -1,6 +1,6 @@
 from contact_us.app.message import Message
 
-from .transmitter import Transmitter
+from ..transmitter import Transmitter
 
 class StdOutTransmitter(Transmitter):
     def transmit(self, message: Message):

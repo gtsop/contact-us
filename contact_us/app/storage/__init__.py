@@ -8,7 +8,7 @@ class StorageStrategies:
     Database: type[Storage] = DatabaseStorage
 
     @staticmethod
-    def setting():
+    def setting() -> type[Storage]:
         if settings.storage_strategy == 'in-memory':
             return InMemoryStorage
         if settings.storage_strategy == 'database':

@@ -1,8 +1,9 @@
 import typer
 
 from contact_us.app import App, create_app
-from contact_us.app.transmitter import Transmitter, StdOutTransmitter
-from contact_us.app.storage import Storage, StorageStrategies 
+from contact_us.app.transmitter import Transmitter, TransmitterStrategies
+from contact_us.app.storage import Storage, StorageStrategies
+
 
 class CLI:
     def __init__(self, app: App):
@@ -39,5 +40,7 @@ def create_cli(transmitter: type[Transmitter], storage: type[Storage]):
 
 
 def main():
-    cli = create_cli(transmitter=StdOutTransmitter, storage=StorageStrategies.setting())
+    cli = create_cli(
+        transmitter=TransmitterStrategies.setting(), storage=StorageStrategies.setting()
+    )
     cli.exec()
