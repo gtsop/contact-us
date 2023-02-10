@@ -16,10 +16,10 @@ def test_settings_instantiates():
     assert Settings()
 
 def test_settings_storage_strategy():
-    os.environ['storage_strategy'] = 'in_memory'
+    os.environ['storage_strategy'] = 'in-memory'
     settings = Settings()
-    assert settings.storage_strategy == 'in_memory'
+    assert settings.storage_strategy == 'in-memory'
 
-    os.environ['storage_strategy'] = 'db_storage'
+    os.environ['storage_strategy'] = 'database'
     settings = Settings()
-    assert settings.storage_strategy == 'db_storage'
+    assert settings.storage_strategy == 'database'

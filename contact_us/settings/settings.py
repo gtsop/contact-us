@@ -4,4 +4,4 @@ from pydantic import BaseSettings
 
 class Settings(BaseSettings):
     storage_db_uri: str = "sqlite:///:memory:"
-    storage_strategy: Literal["in_memory"] | Literal["db_storage"] = "in_memory"
+    storage_strategy: Literal["in-memory"] | Literal["database"] = "in-memory"
