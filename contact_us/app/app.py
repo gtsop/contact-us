@@ -1,8 +1,6 @@
-from enum import Enum
-
 from contact_us.app.message import Message
+from contact_us.app.storage import Storage
 from contact_us.app.transmitter import Transmitter
-from contact_us.app.storage import Storage, InMemoryStorage, DatabaseStorage
 
 
 class App:
