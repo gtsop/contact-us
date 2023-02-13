@@ -2,15 +2,18 @@ import smtpd
 import asyncore
 import threading
 
-class MockSMTP(smtpd.SMTPServer):
-    def __init__(self, localaddr, remoteaddr, messages=None):
+class MockSMTPServer(smtpd.SMTPServer):
+    def __init__(self, host='localhost', port=2323, messages=None):
         if messages is None:
             messages = []
         self.messages = messages
-        smtpd.SMTPServer.__init__(self, localaddr, remoteaddr)
+        smtpd.SMTPServer.__init__(self, (host, port), ('', 0))
 
     def process_message(self, peer, mailfrom, rcpttos, data, **kwargs):
         self.messages.append((peer, mailfrom, rcpttos, data))
+    
+    def get_emails(self):
+        return self.messages
 
 class SMTPServerThread(threading.Thread):
     def __init__(self, server):
@@ -23,7 +26,7 @@ class SMTPServerThread(threading.Thread):
 class MockSMTPClient:
     def __init__(self):
         self.messages = []
-        self.server = MockSMTP(('localhost', 2323), None, self.messages)
+        self.server = MockSMTPServer(messages=self.messages)
         self.thread = SMTPServerThread(self.server)
         self.thread.start()
 
@@ -32,4 +35,4 @@ class MockSMTPClient:
 
     def stop(self):
         self.server.close()
-        self.thread.join()
+        # self.thread.join()
